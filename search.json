@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Welcome to Prompt Engineering: A Beginner's Guide",
+    "content": "Prompt engineering is rapidly becoming one of the most critical skills in the age of AI. As large language models (LLMs) like GPT-4, Claude, and others become more integrated into our workflows, the ability to craft effective prompts is becoming essential for developers, content creators, researchers, and business professionals. At its core, prompt engineering is the practice of crafting inputs to AI systems to generate the desired outputs. Think of it as learning to communicate effectively with an AI—understanding how to phrase your requests to get the most useful, accurate, and relevant responses.",
+    "categories": ["Tutorials", "Beginners"],
+    "tags": ["introduction", "basics", "getting-started"],
+    "url": "/2023-11-15-welcome-to-prompt-engineering.html",
+    "date": "Nov 15, 2023",
+    "author": "The Prompt Engineering Team"
+  },
+  {
+    "title": "Advanced Prompt Engineering Techniques for Better AI Responses",
+    "content": "In our previous post, we covered the basics of prompt engineering and why it matters. Now, let's dive deeper into advanced techniques that can significantly improve the quality and specificity of AI-generated responses. As language models grow more sophisticated, so too must our prompting strategies. Advanced prompt engineering techniques allow us to tap into the deeper reasoning capabilities of these models, address complex problems, and achieve more reliable, accurate results.",
+    "categories": ["Techniques", "Advanced"],
+    "tags": ["advanced-techniques", "chain-of-thought", "few-shot-learning", "system-prompts"],
+    "url": "/2023-12-05-advanced-prompt-engineering-techniques.html",
+    "date": "Dec 5, 2023",
+    "author": "The Prompt Engineering Team"
+  }
+]
