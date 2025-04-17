@@ -1,0 +1,69 @@
+# Site settings
+title: Prompt Engineering Blog
+email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  A blog dedicated to AI prompt engineering techniques, tips, and best practices.
+  Learn how to craft effective prompts for various AI models and use cases.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: username
+github_username:  username
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Collections
+collections:
+  categories:
+    output: true
+    permalink: /categories/:path/
+
+# Default front matter
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
+
+# Custom variables
+author:
+  name: Your Name
+  bio: A brief description about yourself and your interest in prompt engineering.
+  avatar: /assets/images/avatar.jpg
+
+# Social media
+social:
+  twitter: https://twitter.com/yourusername
+  github: https://github.com/yourusername
+  linkedin: https://linkedin.com/in/yourusername
+
+# Analytics
+google_analytics: UA-XXXXXXXXX-X
