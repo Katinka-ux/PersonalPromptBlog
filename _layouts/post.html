@@ -2,56 +2,86 @@
 layout: default
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="container">
-    <header class="post-header">
-      <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-      <p class="post-meta">
-        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-          {{ page.date | date: "%B %-d, %Y" }}
-        </time>
-        {% if page.author %}
-          • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
-          </span>
-        {% endif %}
-        
-        {% if page.categories.size > 0 %}
-        <span class="categories">
-          in 
-          {% for category in page.categories %}
-          <a href="{{ site.baseurl }}/categories/#{{ category | slugify }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
-          {% endfor %}
-        </span>
-        {% endif %}
-      </p>
-      
-      {% if page.tags.size > 0 %}
-      <div class="post-tags">
-        <i class="fa fa-tags"></i>
-        {% for tag in page.tags %}
-        <a href="{{ site.baseurl }}/tags/#{{ tag | slugify }}" class="tag">{{ tag }}</a>
-        {% endfor %}
-      </div>
-      {% endif %}
-    </header>
 
-    <div class="post-content e-content" itemprop="articleBody">
-      {{ content }}
-    </div>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {{ page.date | date: date_format }}
+      </time>
+      {%- if page.author -%}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif -%}</p>
+  </header>
 
-    <div class="post-navigation">
-      <div class="post-nav-item post-nav-prev">
-        {% if page.previous.url %}
-        <a href="{{ page.previous.url | relative_url }}">&larr; {{ page.previous.title }}</a>
-        {% endif %}
-      </div>
-      <div class="post-nav-item post-nav-next">
-        {% if page.next.url %}
-        <a href="{{ page.next.url | relative_url }}">{{ page.next.title }} &rarr;</a>
-        {% endif %}
-      </div>
-    </div>
-
-    <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+  <div class="post-categories">
+    <span>Categories: </span>
+    {% if post %}
+      {% assign categories = post.categories %}
+    {% else %}
+      {% assign categories = page.categories %}
+    {% endif %}
+    {% for category in categories %}
+    <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
   </div>
+
+  <div class="post-tags">
+    <span>Tags: </span>
+    {% if post %}
+      {% assign tags = post.tags %}
+    {% else %}
+      {% assign tags = page.tags %}
+    {% endif %}
+    {% for tag in tags %}
+    <a href="{{site.baseurl}}/tags/#{{tag|slugize}}">{{tag}}</a>
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  </div>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <div class="post-navigation">
+    <div class="previous">
+      {% if page.previous.url %}
+      <a href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+      {% endif %}
+    </div>
+    <div class="next">
+      {% if page.next.url %}
+      <a href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if page.comments %}
+  <div class="post-comments">
+    <h2>Comments</h2>
+    <!-- Comment system integration would go here -->
+    <div class="comment-form">
+      <h3>Leave a Comment</h3>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="comment">Comment</label>
+          <textarea id="comment" name="comment" rows="5" required></textarea>
+        </div>
+        <button type="submit">Submit Comment</button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
