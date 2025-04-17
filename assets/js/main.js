@@ -1,48 +1,72 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile menu toggle
-  const menuTrigger = document.querySelector('.nav-trigger');
-  const menuIcon = document.querySelector('.menu-icon');
-  
-  if (menuTrigger && menuIcon) {
-    menuIcon.addEventListener('click', function() {
-      const expanded = menuTrigger.getAttribute('aria-expanded') === 'true' || false;
-      menuTrigger.setAttribute('aria-expanded', !expanded);
-    });
-  }
-  
-  // Add copy button to code blocks
-  const codeBlocks = document.querySelectorAll('pre code');
-  if (codeBlocks.length > 0) {
-    codeBlocks.forEach(function(codeBlock) {
-      const pre = codeBlock.parentNode;
-      const copyButton = document.createElement('button');
-      copyButton.className = 'copy-code-button';
-      copyButton.textContent = 'Copy';
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
       
-      copyButton.addEventListener('click', function() {
-        const code = codeBlock.textContent;
-        navigator.clipboard.writeText(code).then(function() {
-          copyButton.textContent = 'Copied!';
-          setTimeout(function() {
-            copyButton.textContent = 'Copy';
-          }, 2000);
-        }, function() {
-          copyButton.textContent = 'Failed to copy';
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
         });
-      });
-      
-      pre.insertBefore(copyButton, codeBlock);
+      }
+    });
+  });
+
+  // Mobile menu toggle
+  const navTrigger = document.querySelector('.nav-trigger');
+  if (navTrigger) {
+    navTrigger.addEventListener('change', function() {
+      document.body.classList.toggle('nav-open', this.checked);
     });
   }
-  
-  // Highlight current page in navigation
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll('.nav-links a');
-  
-  navLinks.forEach(function(link) {
-    const linkPath = link.getAttribute('href');
-    if (currentPath === linkPath || (linkPath !== '/' && currentPath.startsWith(linkPath))) {
-      link.classList.add('active');
-    }
-  });
+
+  // Code syntax highlighting (placeholder for integration with a library like Prism.js)
+  if (typeof Prism !== 'undefined') {
+    Prism.highlightAll();
+  }
+
+  // Newsletter subscription form handling
+  const newsletterForm = document.querySelector('.newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = this.querySelector('input[type="email"]');
+      const email = emailInput.value.trim();
+      
+      if (email) {
+        // In a real implementation, this would send the email to a backend service
+        alert('Thank you for subscribing! We\'ll send updates to ' + email);
+        emailInput.value = '';
+      }
+    });
+  }
+
+  // Comment form handling
+  const commentForm = document.querySelector('.comment-form form');
+  if (commentForm) {
+    commentForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nameInput = this.querySelector('#name');
+      const emailInput = this.querySelector('#email');
+      const commentInput = this.querySelector('#comment');
+      
+      // In a real implementation, this would send the comment data to a backend service
+      alert('Thanks for your comment! It will appear once approved.');
+      nameInput.value = '';
+      emailInput.value = '';
+      commentInput.value = '';
+    });
+  }
+
+  // Add current year to copyright notice
+  const copyrightEl = document.querySelector('.copyright');
+  if (copyrightEl) {
+    const currentYear = new Date().getFullYear();
+    const copyrightText = copyrightEl.innerHTML;
+    copyrightEl.innerHTML = copyrightText.replace(/\d{4}/, currentYear);
+  }
 });

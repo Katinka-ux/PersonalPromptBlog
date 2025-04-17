@@ -4,23 +4,19 @@ title: Categories
 permalink: /categories/
 ---
 
-<div class="categories-page">
-  <p>Browse all posts by category:</p>
-  
-  <div class="category-list">
-    {% assign sorted_categories = site.categories | sort %}
-    {% for category in sorted_categories %}
-      <div id="{{ category[0] | slugify }}" class="category-section">
-        <h2 class="category-title">{{ category[0] }}</h2>
-        <ul class="category-post-list">
-          {% for post in category[1] %}
-            <li>
-              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-              <span class="post-date">({{ post.date | date: "%B %-d, %Y" }})</span>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endfor %}
-  </div>
+{% assign categories_sorted = site.categories | sort %}
+<div class="category-list">
+  {% for category in categories_sorted %}
+    <div class="category-group" id="{{ category[0] | slugify }}">
+      <h2 class="category-group-title">{{ category[0] }}</h2>
+      <ul class="post-list-by-category">
+        {% for post in category[1] %}
+          <li class="post-item">
+            <span class="post-item-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
 </div>

@@ -4,31 +4,19 @@ title: Tags
 permalink: /tags/
 ---
 
-<div class="tags-page">
-  <p>Browse all posts by tag:</p>
-  
-  <div class="tag-cloud" style="margin-bottom: 2rem;">
-    {% assign tags = site.tags | sort %}
-    {% for tag in tags %}
-      <a href="#{{ tag[0] | slugify }}" class="tag-item">
-        {{ tag[0] }} ({{ tag[1] | size }})
-      </a>
-    {% endfor %}
-  </div>
-  
-  <div class="tag-list">
-    {% for tag in tags %}
-      <div id="{{ tag[0] | slugify }}" class="tag-section">
-        <h2 class="tag-title">{{ tag[0] }}</h2>
-        <ul class="tag-post-list">
-          {% for post in tag[1] %}
-            <li>
-              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-              <span class="post-date">({{ post.date | date: "%B %-d, %Y" }})</span>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endfor %}
-  </div>
+{% assign tags_sorted = site.tags | sort %}
+<div class="tag-list">
+  {% for tag in tags_sorted %}
+    <div class="tag-group" id="{{ tag[0] | slugify }}">
+      <h2 class="tag-group-title">{{ tag[0] }}</h2>
+      <ul class="post-list-by-tag">
+        {% for post in tag[1] %}
+          <li class="post-item">
+            <span class="post-item-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
 </div>
