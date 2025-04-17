@@ -1,48 +1,70 @@
 # Site settings
 title: Prompt Engineering Blog
-email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  A blog dedicated to AI prompt engineering techniques, tips, and best practices.
-  Learn how to craft effective prompts for various AI models and use cases.
+description: >-
+  A community-focused blog on AI prompt engineering techniques, best practices,
+  and the latest research to help you get the most out of large language models.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: username
-github_username:  username
+
+# Author information
+author:
+  name: Prompt Engineering Team
+  email: example@promptengineering.blog
+
+# Social media
+social:
+  github: https://github.com/yourusername
+  twitter: https://twitter.com/yourusername
+  linkedin: https://linkedin.com/in/yourusername
 
 # Build settings
 markdown: kramdown
-theme: minima
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-paginate
 
+# Pagination
+paginate: 6
+paginate_path: "/page/:num/"
+
 # Collections
 collections:
-  categories:
+  drafts:
     output: true
-    permalink: /categories/:path/
+    permalink: /:collection/:name
 
-# Default front matter
+# Defaults
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
       comments: true
-  -
-    scope:
+  - scope:
       path: ""
-      type: "pages"
+      type: "drafts"
     values:
-      layout: "page"
-
-# Pagination
-paginate: 10
-paginate_path: "/page:num/"
+      layout: "post"
+      comments: false
+  - scope:
+      path: ""
+    values:
+      layout: "default"
 
 # Exclude from processing
 exclude:
@@ -50,20 +72,9 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
-  - .gitignore
+  - .git
+  - .github
+  - CHANGELOG.md
   - README.md
-
-# Custom variables
-author:
-  name: Your Name
-  bio: A brief description about yourself and your interest in prompt engineering.
-  avatar: /assets/images/avatar.jpg
-
-# Social media
-social:
-  twitter: https://twitter.com/yourusername
-  github: https://github.com/yourusername
-  linkedin: https://linkedin.com/in/yourusername
-
-# Analytics
-google_analytics: UA-XXXXXXXXX-X
+  - LICENSE
+  - server.py

@@ -6,6 +6,14 @@
         <p class="site-description">{{ site.description | escape }}</p>
       </div>
       
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Search for prompt techniques...">
+          <button class="search-button"><i class="fas fa-search"></i></button>
+        </div>
+        <ul id="search-results" class="search-results"></ul>
+      </div>
+      
       {%- include navigation.html -%}
     </div>
   </div>
